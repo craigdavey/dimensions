@@ -1,0 +1,11 @@
+{
+  "author": "Craig Davey <me@craigdavey.ca> (http://craigdavey.ca/)",
+  "name": "dimensions",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
