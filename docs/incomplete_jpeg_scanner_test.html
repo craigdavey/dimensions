@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>incomplete_jpeg_scanner_test.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="exif_scanner.html">
+                exif_scanner.coffee
+              </a>
+            
+              
+              <a class="source" href="format_identification.html">
+                format_identification.coffee
+              </a>
+            
+              
+              <a class="source" href="index.html">
+                index.coffee
+              </a>
+            
+              
+              <a class="source" href="jpeg_scanner.html">
+                jpeg_scanner.coffee
+              </a>
+            
+              
+              <a class="source" href="scanning.html">
+                scanning.coffee
+              </a>
+            
+              
+              <a class="source" href="tiff_scanner.html">
+                tiff_scanner.coffee
+              </a>
+            
+              
+              <a class="source" href="tiff_scanning.html">
+                tiff_scanning.coffee
+              </a>
+            
+              
+              <a class="source" href="buffered_dimensions_test.html">
+                buffered_dimensions_test.coffee
+              </a>
+            
+              
+              <a class="source" href="exif_scanner_test.html">
+                exif_scanner_test.coffee
+              </a>
+            
+              
+              <a class="source" href="format_identification_test.html">
+                format_identification_test.coffee
+              </a>
+            
+              
+              <a class="source" href="incomplete_jpeg_scanner_test.html">
+                incomplete_jpeg_scanner_test.coffee
+              </a>
+            
+              
+              <a class="source" href="jpeg_scanner_test.html">
+                jpeg_scanner_test.coffee
+              </a>
+            
+              
+              <a class="source" href="streaming_dimensions_test.html">
+                streaming_dimensions_test.coffee
+              </a>
+            
+              
+              <a class="source" href="test_helper.html">
+                test_helper.coffee
+              </a>
+            
+              
+              <a class="source" href="tiff_scanner_test.html">
+                tiff_scanner_test.coffee
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>incomplete_jpeg_scanner_test.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>{buffer}    = <span class="hljs-built_in">require</span> <span class="hljs-string">"./test_helper"</span>
+JPEGScanner = <span class="hljs-built_in">require</span> <span class="hljs-string">"../src/jpeg_scanner"</span>
+
+<span class="hljs-built_in">module</span>.exports =
+  <span class="hljs-string">"dimensions are undefined for jpg without bytes"</span>: <span class="hljs-function"><span class="hljs-params">(test)</span> -&gt;</span>
+    scanner = <span class="hljs-keyword">new</span> JPEGScanner
+    test.equality <span class="hljs-literal">false</span>, scanner.scan(buffer(<span class="hljs-string">"zero_bytes"</span>))
+    test.equality <span class="hljs-literal">undefined</span>, scanner.width
+    test.equality <span class="hljs-literal">undefined</span>, scanner.height
+    test.equality <span class="hljs-number">0</span>, scanner.angle
+    test.done()
+
+  <span class="hljs-string">"dimensions are undefined for jpg with incomplete APP1 frame"</span>: <span class="hljs-function"><span class="hljs-params">(test)</span> -&gt;</span>
+    scanner = <span class="hljs-keyword">new</span> JPEGScanner
+    test.equality <span class="hljs-literal">false</span>, scanner.scan(buffer(<span class="hljs-string">"incomplete_app_1_frame.jpg"</span>))
+    test.equality <span class="hljs-literal">undefined</span>, scanner.width
+    test.equality <span class="hljs-literal">undefined</span>, scanner.height
+    test.equality <span class="hljs-number">0</span>, scanner.angle
+    test.done()
+
+  <span class="hljs-string">"dimensions are undefined for jpg with incomplete Zero frame"</span>: <span class="hljs-function"><span class="hljs-params">(test)</span> -&gt;</span>
+    scanner = <span class="hljs-keyword">new</span> JPEGScanner
+    test.equality <span class="hljs-literal">false</span>, scanner.scan(buffer(<span class="hljs-string">"incomplete_zero_frame.jpg"</span>))
+    test.equality <span class="hljs-literal">undefined</span>, scanner.width
+    test.equality <span class="hljs-literal">undefined</span>, scanner.height
+    test.equality <span class="hljs-number">0</span>, scanner.angle
+    test.done()</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

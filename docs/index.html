@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>index.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="exif_scanner.html">
+                exif_scanner.coffee
+              </a>
+            
+              
+              <a class="source" href="format_identification.html">
+                format_identification.coffee
+              </a>
+            
+              
+              <a class="source" href="index.html">
+                index.coffee
+              </a>
+            
+              
+              <a class="source" href="jpeg_scanner.html">
+                jpeg_scanner.coffee
+              </a>
+            
+              
+              <a class="source" href="scanning.html">
+                scanning.coffee
+              </a>
+            
+              
+              <a class="source" href="tiff_scanner.html">
+                tiff_scanner.coffee
+              </a>
+            
+              
+              <a class="source" href="tiff_scanning.html">
+                tiff_scanning.coffee
+              </a>
+            
+              
+              <a class="source" href="buffered_dimensions_test.html">
+                buffered_dimensions_test.coffee
+              </a>
+            
+              
+              <a class="source" href="exif_scanner_test.html">
+                exif_scanner_test.coffee
+              </a>
+            
+              
+              <a class="source" href="format_identification_test.html">
+                format_identification_test.coffee
+              </a>
+            
+              
+              <a class="source" href="incomplete_jpeg_scanner_test.html">
+                incomplete_jpeg_scanner_test.coffee
+              </a>
+            
+              
+              <a class="source" href="jpeg_scanner_test.html">
+                jpeg_scanner_test.coffee
+              </a>
+            
+              
+              <a class="source" href="streaming_dimensions_test.html">
+                streaming_dimensions_test.coffee
+              </a>
+            
+              
+              <a class="source" href="test_helper.html">
+                test_helper.coffee
+              </a>
+            
+              
+              <a class="source" href="tiff_scanner_test.html">
+                tiff_scanner_test.coffee
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>index.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p><strong>Dimensions</strong> is a <a href="">Node</a> module for reading the width, height and rotation 
+angle of GIF, PNG, JPEG and TIFF images. It is written in <a href="">Coffeescript</a>.
+It has no dependencies. </p>
+<p><a href="https://github.com/craigdavey/dimensions">Source code</a> is available on GitHub under MIT license terms.
+This module was derived from <a href="https://github.com/sstephenson/dimensions">Sam Stephenson’s Dimensions Gem</a> for the Ruby programming language.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+Stream               = <span class="hljs-built_in">require</span> <span class="hljs-string">"stream"</span>
+FormatIdentification = <span class="hljs-built_in">require</span> <span class="hljs-string">"./format_identification"</span>
+JPEGScanner          = <span class="hljs-built_in">require</span> <span class="hljs-string">"./jpeg_scanner"</span>
+TIFFScanner          = <span class="hljs-built_in">require</span> <span class="hljs-string">"./tiff_scanner"</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Install the module with <code>npm install dimensions</code> and then require it in your program:</p>
+<pre><code>Dimensions = <span class="hljs-built_in">require</span> <span class="hljs-string">"dimensions"</span>
+</code></pre><p>The <code>Dimensions</code> constructor accepts a <code>buffer</code> or no arguments.
+If you pass a <code>buffer</code> the dimensions will be processed immediately:</p>
+<pre><code>fs.readFile <span class="hljs-string">"nyc.jpg"</span>, <span class="hljs-function"><span class="hljs-params">(error, buffer)</span> -&gt;</span>
+  dimensions = <span class="hljs-keyword">new</span> Dimensions buffer
+  dimensions.height <span class="hljs-comment"># Number of pixels.</span>
+  dimensions.width  <span class="hljs-comment"># Number of pixels.</span>
+  dimensions.angle  <span class="hljs-comment"># Rotation angle in degrees.</span>
+</code></pre><p>Listen for the <code>&quot;ready&quot;</code> event when you pipe a stream to an instance of <code>Dimensions</code>:</p>
+<pre><code>stream = fs.createReadStream <span class="hljs-string">"nyc.jpg"</span>
+dimensions = stream.pipe <span class="hljs-keyword">new</span> Dimensions
+dimensions.<span class="hljs-literal">on</span> <span class="hljs-string">"ready"</span>, <span class="hljs-function">-&gt;</span>
+  dimensions.height <span class="hljs-comment"># Number of pixels.</span>
+  dimensions.width  <span class="hljs-comment"># Number of pixels.</span>
+  dimensions.angle  <span class="hljs-comment"># Rotation angle in degrees.</span>
+</code></pre><p>Transparently read <code>Dimensions</code> while you write input to another stream:</p>
+<pre><code>server.post <span class="hljs-string">"/attachments"</span>, <span class="hljs-function"><span class="hljs-params">(request, response, next)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> Dimensions.canMeasure request.headers[<span class="hljs-string">"content-type"</span>]
+    dimensions = <span class="hljs-keyword">new</span> Dimensions(request)
+
+  file = fs.createWriteStream(<span class="hljs-string">"uploads/<span class="hljs-subst">#{token}</span>"</span>)
+  request.pipe(file).<span class="hljs-literal">on</span> <span class="hljs-string">"close"</span>, <span class="hljs-function">-&gt;</span>
+    response.writeHead <span class="hljs-number">201</span>, <span class="hljs-string">"Content-Type"</span>: <span class="hljs-string">"application/json"</span>
+    response.end JSON.stringify({
+      id:     id
+      height: dimensions.height
+      width:  dimensions.width
+    })
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dimensions</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Stream</span></span>
+  <span class="hljs-built_in">module</span>.exports = <span class="hljs-keyword">this</span>
+
+  SUPPORTED_TYPES = [<span class="hljs-string">"image/jpeg"</span>, <span class="hljs-string">"image/png"</span>, <span class="hljs-string">"image/gif"</span>, <span class="hljs-string">"image/tiff"</span>]
+
+  @canMeasure: <span class="hljs-function"><span class="hljs-params">(type)</span> -&gt;</span> type <span class="hljs-keyword">in</span> SUPPORTED_TYPES
+
+  constructor: <span class="hljs-function"><span class="hljs-params">(bufferOrStream)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> Buffer.isBuffer bufferOrStream
+      @buffer = bufferOrStream
+      @process()
+    <span class="hljs-keyword">else</span>
+      @buffer = <span class="hljs-keyword">new</span> Buffer <span class="hljs-number">0</span>
+      @writable = <span class="hljs-literal">true</span>
+
+      <span class="hljs-keyword">if</span> bufferOrStream
+        @stream = bufferOrStream
+        @stream.<span class="hljs-literal">on</span> <span class="hljs-string">"data"</span>, @write
+        @stream.<span class="hljs-literal">on</span> <span class="hljs-string">"end"</span>, @end</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Identify the image format of the buffered data and then try to extract the image dimensions.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  process: <span class="hljs-function">-&gt;</span>
+    @format ?= @identifyFormatOf @buffer
+    @[<span class="hljs-string">"extractDimensionsFor<span class="hljs-subst">#{@format}</span>"</span>]() <span class="hljs-keyword">if</span> @format
+    @done() <span class="hljs-keyword">unless</span> @writable</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Include <a href="format_identification.coffee">image format identification</a> methods.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  @prototype[name] = func <span class="hljs-keyword">for</span> name, func <span class="hljs-keyword">of</span> FormatIdentification</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>The <code>width</code> and <code>height</code> of a GIF is stored in a pair of unsigned 16 bit 
+integers with little endian formating at position <code>6</code> and <code>8</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  extractDimensionsForGIF: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">if</span> @buffer.length &gt;= <span class="hljs-number">10</span>
+      @width  = @buffer.readUInt16LE(<span class="hljs-number">6</span>)
+      @height = @buffer.readUInt16LE(<span class="hljs-number">8</span>)
+      @done()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>The <code>width</code> and <code>height</code> of a PNG is stored in a pair of unsigned 32 bit 
+integers with little endian formating at position <code>16</code> and <code>20</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  extractDimensionsForPNG: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">if</span> @buffer.length &gt;= <span class="hljs-number">24</span>
+      @width  = @buffer.readUInt32BE(<span class="hljs-number">16</span>)
+      @height = @buffer.readUInt32BE(<span class="hljs-number">20</span>)
+      @done()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Delegates extraction to a <a href="jpeg_scanner.coffee">JPEGScanner</a>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  extractDimensionsForJPEG: <span class="hljs-function">-&gt;</span>
+    scanner = <span class="hljs-keyword">new</span> JPEGScanner
+    <span class="hljs-keyword">if</span> scanner.scan @buffer
+      @width  = scanner.width
+      @height = scanner.height
+      @angle  = scanner.angle
+      @done()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Delegates extraction to a <a href="tiff_scanner.coffee">TIFFScanner</a>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  extractDimensionsForTIFF: <span class="hljs-function">-&gt;</span>
+    scanner = <span class="hljs-keyword">new</span> TIFFScanner
+    <span class="hljs-keyword">if</span> scanner.scan @buffer
+      @width  = scanner.width
+      @height = scanner.height
+      @done()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Called when the image dimensions have been successfully extracted or the buffer has been exhausted.
+Deletes innessential members and emits a <code>&quot;ready&quot;</code> event with an object that contains <code>width</code>, <code>height</code> and <code>angle</code> dimensions.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  done: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">if</span> @stream
+      @stream.removeListener(<span class="hljs-string">"data"</span>, @write)
+      @stream.removeListener(<span class="hljs-string">"end"</span>, @end)
+      <span class="hljs-keyword">delete</span> @stream
+
+    <span class="hljs-keyword">delete</span> @end
+    <span class="hljs-keyword">delete</span> @write
+    <span class="hljs-keyword">delete</span> @buffer
+    <span class="hljs-keyword">delete</span> @format
+
+    <span class="hljs-keyword">if</span> @writable
+      <span class="hljs-keyword">delete</span> @writable
+      @emit <span class="hljs-string">"ready"</span>, @toJSON()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Returns an object with <code>width</code>, <code>height</code> and <code>angle</code> members that is suitable for serialization.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toJSON: <span class="hljs-function">-&gt;</span>
+    members = <span class="hljs-keyword">new</span> Object
+    members[name] = value <span class="hljs-keyword">for</span> own name, value <span class="hljs-keyword">of</span> <span class="hljs-keyword">this</span> <span class="hljs-keyword">when</span> name[<span class="hljs-number">0</span>] <span class="hljs-keyword">isnt</span> <span class="hljs-string">"_"</span>
+    <span class="hljs-keyword">return</span> members</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Record and process incoming <code>data</code> from a stream. 
+<code>write</code> always returns <code>true</code> because it has no need to apply back pressure on the read stream.
+If the instance isn’t writable <code>write</code> is a noop. </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  write: <span class="hljs-function"><span class="hljs-params">(data)</span> =&gt;</span>
+    <span class="hljs-keyword">if</span> @writable
+      @buffer = Buffer.concat [@buffer, data]
+      @process()
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Possibly write the last chunk of <code>data</code> and mark this as done. </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  end: <span class="hljs-function"><span class="hljs-params">(data)</span> =&gt;</span>
+    @write data <span class="hljs-keyword">if</span> data?
+    @done()</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
