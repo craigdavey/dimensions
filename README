@@ -1,5 +1,2 @@
-Dimensions is a pure Coffeescript library for reading the width, height and
-rotation angle of GIF, PNG, JPEG and TIFF images in a Node environment.
-
-Review the annotated source code at:
-https://craigdavey.github.io/docs/index.html
+See annotated source code at:
+https://craigdavey.github.io/dimensions
