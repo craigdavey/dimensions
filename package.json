@@ -1,11 +1,12 @@
 {
-  "author":          "Craig Davey <hello@craigdavey.ca>",
-  "name":            "dimensions",
-  "version":         "0.0.0",
-  "dependencies":    {},
+  "author": "Craig Davey <hello@craigdavey.ca>",
+  "name": "dimensions",
+  "version": "0.0.0",
+  "dependencies": {},
   "devDependencies": {
     "coffee-script": "*",
-    "nodeunit":      "*"
+    "docco": "^0.7.0",
+    "nodeunit": "*"
   },
   "scripts": {
     "test": "cake test"
