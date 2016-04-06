@@ -1,8 +1,8 @@
 {
-  "author": "Craig Davey <hello@craigdavey.ca>",
   "name": "dimensions",
   "version": "0.0.0",
-  "dependencies": {},
+  "repository": "craigdavey/dimensions",
+  "license": "Unlicense",
   "devDependencies": {
     "coffee-script": "*",
     "docco": "*",
