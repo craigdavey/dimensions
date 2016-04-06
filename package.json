@@ -5,7 +5,7 @@
   "dependencies": {},
   "devDependencies": {
     "coffee-script": "*",
-    "docco": "^0.7.0",
+    "docco": "*",
     "nodeunit": "*"
   },
   "scripts": {
