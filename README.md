@@ -4,7 +4,7 @@ Dimensions
 Dimensions is a pure Coffeescript library for reading the width, height and
 rotation angle of GIF, PNG, JPEG and TIFF images in a Node.js environment.
 
-This module was derived from [Sam Stephenson Dimensions library for ruby programming language].
+This module is a derivative of [Sam Stephenson’s Dimensions library for the Ruby programming language].
 
 Use the `dimensions`, `width` and `height` methods on the `Dimensions`
 module to measure image files:
