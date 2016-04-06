@@ -6,3 +6,9 @@ task "test", "Run the test suite", (options) ->
   child.stdout.on "data", (text) -> console.info  text.trim()
   child.stderr.on "data", (text) -> console.error text.trim()
   child.on "exit", process.exit
+
+task "docs", "Generate documentation", (options) ->
+  child = exec "docco src/* test/*"
+  child.stdout.on "data", (text) -> console.info  text.trim()
+  child.stderr.on "data", (text) -> console.error text.trim()
+  child.on "exit", process.exit
