@@ -1,6 +1,6 @@
-# **Dimensions** is a [Node]() module for reading the width, height and rotation 
-# angle of GIF, PNG, JPEG and TIFF images. It is written in [Coffeescript]().
-# It has no dependencies. 
+# **Dimensions** is a [Node](https://nodejs.org/) module for reading the width, height and rotation
+# angle of GIF, PNG, JPEG and TIFF images. It is written in [Coffeescript](http://coffeescript.org/).
+# It has no dependencies.
 #
 # [Source code](https://github.com/craigdavey/dimensions) is available on GitHub under MIT license terms.
 # This module was derived from [Sam Stephenson’s Dimensions Gem](https://github.com/sstephenson/dimensions) for the Ruby programming language.
@@ -12,7 +12,7 @@ TIFFScanner          = require "./tiff_scanner"
 
 # Install the module with `npm install dimensions` and then require it in your program:
 #
-#     Dimensions = require "dimensions"
+#     Dimensions = require "craigdavey/dimensions"
 #
 # The `Dimensions` constructor accepts a `buffer` or no arguments.
 # If you pass a `buffer` the dimensions will be processed immediately:
@@ -76,7 +76,7 @@ class Dimensions extends Stream
   # Include [image format identification](format_identification.coffee) methods.
   @prototype[name] = func for name, func of FormatIdentification
 
-  # The `width` and `height` of a GIF is stored in a pair of unsigned 16 bit 
+  # The `width` and `height` of a GIF is stored in a pair of unsigned 16 bit
   # integers with little endian formating at position `6` and `8`.
   extractDimensionsForGIF: ->
     if @buffer.length >= 10
@@ -84,7 +84,7 @@ class Dimensions extends Stream
       @height = @buffer.readUInt16LE(8)
       @done()
 
-  # The `width` and `height` of a PNG is stored in a pair of unsigned 32 bit 
+  # The `width` and `height` of a PNG is stored in a pair of unsigned 32 bit
   # integers with little endian formating at position `16` and `20`.
   extractDimensionsForPNG: ->
     if @buffer.length >= 24
@@ -133,16 +133,16 @@ class Dimensions extends Stream
     members[name] = value for own name, value of this when name[0] isnt "_"
     return members
 
-  # Record and process incoming `data` from a stream. 
+  # Record and process incoming `data` from a stream.
   # `write` always returns `true` because it has no need to apply back pressure on the read stream.
-  # If the instance isn’t writable `write` is a noop. 
+  # If the instance isn’t writable `write` is a noop.
   write: (data) =>
     if @writable
       @buffer = Buffer.concat [@buffer, data]
       @process()
     return true
 
-  # Possibly write the last chunk of `data` and mark this as done. 
+  # Possibly write the last chunk of `data` and mark this as done.
   end: (data) =>
     @write data if data?
     @done()
