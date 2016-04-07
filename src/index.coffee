@@ -2,8 +2,11 @@
 # angle of GIF, PNG, JPEG and TIFF images. It is written in [Coffeescript](http://coffeescript.org/).
 # It has no dependencies.
 #
-# [Source code](https://github.com/craigdavey/dimensions) is available on GitHub under MIT license terms.
-# This module was derived from [Sam Stephenson’s Dimensions Gem](https://github.com/sstephenson/dimensions) for the Ruby programming language.
+# **Dimensions** is Public Domain software — the [source code](https://github.com/craigdavey/dimensions)
+# is available on GitHub.
+#
+# This module was derived from [Sam Stephenson’s Dimensions Gem](https://github.com/sstephenson/dimensions)
+# for the [Ruby](https://ruby-lang.org/) programming language.
 
 Stream               = require "stream"
 FormatIdentification = require "./format_identification"
