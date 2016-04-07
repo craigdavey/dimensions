@@ -113,11 +113,9 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p><strong>Dimensions</strong> is a <a href="https://nodejs.org/">Node</a> module for reading the width, height and rotation
-angle of GIF, PNG, JPEG and TIFF images. It is written in <a href="http://coffeescript.org/">Coffeescript</a>.
-It has no dependencies.</p>
-<p><strong>Dimensions</strong> is Public Domain software — the <a href="https://github.com/craigdavey/dimensions">source code</a>
-is available on GitHub.</p>
+              <p><strong>Dimensions</strong> is a <a href="https://nodejs.org/">Node</a> module for reading the width, height and rotation  angle of GIF, PNG, JPEG and TIFF images.
+It is written in <a href="http://coffeescript.org/">Coffeescript</a>, it has <a href="https://github.com/craigdavey/dimensions/blob/master/package.json">zero dependencies</a> and it is in the <a href="https://unlicense.org/">Public Domain</a>.</p>
+<p><a href="https://github.com/craigdavey/dimensions">https://github.com/craigdavey/dimensions</a></p>
 <p>This module was derived from <a href="https://github.com/sstephenson/dimensions">Sam Stephenson’s Dimensions Gem</a>
 for the <a href="https://ruby-lang.org/">Ruby</a> programming language.</p>
 
@@ -138,8 +136,8 @@ TIFFScanner          = <span class="hljs-built_in">require</span> <span class="h
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Install the module with <code>npm install dimensions</code> and then require it in your program:</p>
-<pre><code>Dimensions = <span class="hljs-built_in">require</span> <span class="hljs-string">"craigdavey/dimensions"</span>
+              <p>Install the module with <code>npm install craigdavey/dimensions</code> and then require it in your program:</p>
+<pre><code>Dimensions = <span class="hljs-built_in">require</span> <span class="hljs-string">"dimensions"</span>
 </code></pre><p>The <code>Dimensions</code> constructor accepts a <code>buffer</code> or no arguments.
 If you pass a <code>buffer</code> the dimensions will be processed immediately:</p>
 <pre><code>fs.readFile <span class="hljs-string">"nyc.jpg"</span>, <span class="hljs-function"><span class="hljs-params">(error, buffer)</span> -&gt;</span>

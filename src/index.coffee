@@ -11,9 +11,9 @@ FormatIdentification = require "./format_identification"
 JPEGScanner          = require "./jpeg_scanner"
 TIFFScanner          = require "./tiff_scanner"
 
-# Install the module with `npm install dimensions` and then require it in your program:
+# Install the module with `npm install craigdavey/dimensions` and then require it in your program:
 #
-#     Dimensions = require "craigdavey/dimensions"
+#     Dimensions = require "dimensions"
 #
 # The `Dimensions` constructor accepts a `buffer` or no arguments.
 # If you pass a `buffer` the dimensions will be processed immediately:
