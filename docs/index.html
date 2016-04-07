@@ -113,9 +113,9 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p><strong>Dimensions</strong> is a <a href="">Node</a> module for reading the width, height and rotation 
-angle of GIF, PNG, JPEG and TIFF images. It is written in <a href="">Coffeescript</a>.
-It has no dependencies. </p>
+              <p><strong>Dimensions</strong> is a <a href="https://nodejs.org/">Node</a> module for reading the width, height and rotation
+angle of GIF, PNG, JPEG and TIFF images. It is written in <a href="http://coffeescript.org/">Coffeescript</a>.
+It has no dependencies.</p>
 <p><a href="https://github.com/craigdavey/dimensions">Source code</a> is available on GitHub under MIT license terms.
 This module was derived from <a href="https://github.com/sstephenson/dimensions">Sam Stephenson’s Dimensions Gem</a> for the Ruby programming language.</p>
 
@@ -137,7 +137,7 @@ TIFFScanner          = <span class="hljs-built_in">require</span> <span class="h
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
               <p>Install the module with <code>npm install dimensions</code> and then require it in your program:</p>
-<pre><code>Dimensions = <span class="hljs-built_in">require</span> <span class="hljs-string">"dimensions"</span>
+<pre><code>Dimensions = <span class="hljs-built_in">require</span> <span class="hljs-string">"craigdavey/dimensions"</span>
 </code></pre><p>The <code>Dimensions</code> constructor accepts a <code>buffer</code> or no arguments.
 If you pass a <code>buffer</code> the dimensions will be processed immediately:</p>
 <pre><code>fs.readFile <span class="hljs-string">"nyc.jpg"</span>, <span class="hljs-function"><span class="hljs-params">(error, buffer)</span> -&gt;</span>
@@ -231,7 +231,7 @@ dimensions.<span class="hljs-literal">on</span> <span class="hljs-string">"ready
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>The <code>width</code> and <code>height</code> of a GIF is stored in a pair of unsigned 16 bit 
+              <p>The <code>width</code> and <code>height</code> of a GIF is stored in a pair of unsigned 16 bit
 integers with little endian formating at position <code>6</code> and <code>8</code>.</p>
 
             </div>
@@ -251,7 +251,7 @@ integers with little endian formating at position <code>6</code> and <code>8</co
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>The <code>width</code> and <code>height</code> of a PNG is stored in a pair of unsigned 32 bit 
+              <p>The <code>width</code> and <code>height</code> of a PNG is stored in a pair of unsigned 32 bit
 integers with little endian formating at position <code>16</code> and <code>20</code>.</p>
 
             </div>
@@ -359,9 +359,9 @@ Deletes innessential members and emits a <code>&quot;ready&quot;</code> event wi
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>Record and process incoming <code>data</code> from a stream. 
+              <p>Record and process incoming <code>data</code> from a stream.
 <code>write</code> always returns <code>true</code> because it has no need to apply back pressure on the read stream.
-If the instance isn’t writable <code>write</code> is a noop. </p>
+If the instance isn’t writable <code>write</code> is a noop.</p>
 
             </div>
             
@@ -380,7 +380,7 @@ If the instance isn’t writable <code>write</code> is a noop. </p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>Possibly write the last chunk of <code>data</code> and mark this as done. </p>
+              <p>Possibly write the last chunk of <code>data</code> and mark this as done.</p>
 
             </div>
             
