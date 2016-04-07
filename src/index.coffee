@@ -1,9 +1,7 @@
-# **Dimensions** is a [Node](https://nodejs.org/) module for reading the width, height and rotation
-# angle of GIF, PNG, JPEG and TIFF images. It is written in [Coffeescript](http://coffeescript.org/).
-# It has no dependencies.
+# **Dimensions** is a [Node](https://nodejs.org/) module for reading the width, height and rotation  angle of GIF, PNG, JPEG and TIFF images.
+# It is written in [Coffeescript](http://coffeescript.org/), it has [zero dependencies](https://github.com/craigdavey/dimensions/blob/master/package.json) and it is in the [Public Domain](https://unlicense.org/).
 #
-# **Dimensions** is Public Domain software — the [source code](https://github.com/craigdavey/dimensions)
-# is available on GitHub.
+# [https://github.com/craigdavey/dimensions](https://github.com/craigdavey/dimensions)
 #
 # This module was derived from [Sam Stephenson’s Dimensions Gem](https://github.com/sstephenson/dimensions)
 # for the [Ruby](https://ruby-lang.org/) programming language.
