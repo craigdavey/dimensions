@@ -113,12 +113,10 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p><strong>Dimensions</strong> is a <a href="https://nodejs.org/">Node</a> module to read width, height and rotation angle from GIF, PNG, JPEG and TIFF images.
+              <p><strong><a href="https://github.com/craigdavey/dimensions">Dimensions</a></strong> is a <a href="https://nodejs.org/">Node</a> module to read width, height and rotation angle from GIF, PNG, JPEG and TIFF images.
 It is written in <a href="http://coffeescript.org/">Coffeescript</a>,
 it has <a href="https://github.com/craigdavey/dimensions/blob/master/package.json">zero dependencies</a>
 and it is in the <a href="https://unlicense.org/">Public Domain</a>.</p>
-<p>Clone the source code from:
-<a href="https://github.com/craigdavey/dimensions">github.com/craigdavey/dimensions</a></p>
 <p>This module was derived from <a href="https://github.com/sstephenson/dimensions">Sam Stephenson’s Dimensions Gem</a>
 for the <a href="https://ruby-lang.org/">Ruby</a> programming language.</p>
 
@@ -139,7 +137,7 @@ TIFFScanner          = <span class="hljs-built_in">require</span> <span class="h
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Install the module with <code>npm install craigdavey/dimensions</code> and then require it in your program:</p>
+              <p>Install the module with <code>npm install craigdavey/dimensions#0.0.1</code> and then require it in your program:</p>
 <pre><code>Dimensions = <span class="hljs-built_in">require</span> <span class="hljs-string">"dimensions"</span>
 </code></pre><p>The <code>Dimensions</code> constructor accepts a <code>buffer</code> or no arguments.
 If you pass a <code>buffer</code> the dimensions will be processed immediately:</p>
@@ -155,18 +153,18 @@ dimensions.<span class="hljs-literal">on</span> <span class="hljs-string">"ready
   dimensions.height <span class="hljs-comment"># Number of pixels.</span>
   dimensions.width  <span class="hljs-comment"># Number of pixels.</span>
   dimensions.angle  <span class="hljs-comment"># Rotation angle in degrees.</span>
-</code></pre><p>Transparently read <code>Dimensions</code> while you write input to another stream:</p>
+</code></pre><p>Read image dimensions while simultaneously writing input to another stream:</p>
 <pre><code>server.post <span class="hljs-string">"/attachments"</span>, <span class="hljs-function"><span class="hljs-params">(request, response, next)</span> -&gt;</span>
   <span class="hljs-keyword">if</span> Dimensions.canMeasure request.headers[<span class="hljs-string">"content-type"</span>]
     dimensions = <span class="hljs-keyword">new</span> Dimensions(request)
-
-  file = fs.createWriteStream(<span class="hljs-string">"uploads/<span class="hljs-subst">#{token}</span>"</span>)
-  request.pipe(file).<span class="hljs-literal">on</span> <span class="hljs-string">"close"</span>, <span class="hljs-function">-&gt;</span>
+  id = storage.gererateIDforAttachment(request)
+  request.pipe(fs.createWriteStream(<span class="hljs-string">"uploads/<span class="hljs-subst">#{id}</span>"</span>)).<span class="hljs-literal">on</span> <span class="hljs-string">"close"</span>, <span class="hljs-function">-&gt;</span>
     response.writeHead <span class="hljs-number">201</span>, <span class="hljs-string">"Content-Type"</span>: <span class="hljs-string">"application/json"</span>
     response.end JSON.stringify({
       id:     id
-      height: dimensions.height
-      width:  dimensions.width
+      type:   request.headers[<span class="hljs-string">"content-type"</span>]
+      height: dimensions?.height
+      width:  dimensions?.width
     })
 </code></pre>
             </div>

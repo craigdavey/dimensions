@@ -1,10 +1,7 @@
-# **Dimensions** is a [Node](https://nodejs.org/) module to read width, height and rotation angle from GIF, PNG, JPEG and TIFF images.
+# **[Dimensions](https://github.com/craigdavey/dimensions)** is a [Node](https://nodejs.org/) module to read width, height and rotation angle from GIF, PNG, JPEG and TIFF images.
 # It is written in [Coffeescript](http://coffeescript.org/),
 # it has [zero dependencies](https://github.com/craigdavey/dimensions/blob/master/package.json)
 # and it is in the [Public Domain](https://unlicense.org/).
-#
-# Clone the source code from:
-# [github.com/craigdavey/dimensions](https://github.com/craigdavey/dimensions)
 #
 # This module was derived from [Sam Stephenson’s Dimensions Gem](https://github.com/sstephenson/dimensions)
 # for the [Ruby](https://ruby-lang.org/) programming language.
@@ -14,7 +11,7 @@ FormatIdentification = require "./format_identification"
 JPEGScanner          = require "./jpeg_scanner"
 TIFFScanner          = require "./tiff_scanner"
 
-# Install the module with `npm install craigdavey/dimensions` and then require it in your program:
+# Install the module with `npm install craigdavey/dimensions#0.0.1` and then require it in your program:
 #
 #     Dimensions = require "dimensions"
 #
@@ -36,19 +33,19 @@ TIFFScanner          = require "./tiff_scanner"
 #       dimensions.width  # Number of pixels.
 #       dimensions.angle  # Rotation angle in degrees.
 #
-# Transparently read `Dimensions` while you write input to another stream:
+# Read image dimensions while simultaneously writing input to another stream:
 #
 #     server.post "/attachments", (request, response, next) ->
 #       if Dimensions.canMeasure request.headers["content-type"]
 #         dimensions = new Dimensions(request)
-#
-#       file = fs.createWriteStream("uploads/#{token}")
-#       request.pipe(file).on "close", ->
+#       id = storage.gererateIDforAttachment(request)
+#       request.pipe(fs.createWriteStream("uploads/#{id}")).on "close", ->
 #         response.writeHead 201, "Content-Type": "application/json"
 #         response.end JSON.stringify({
 #           id:     id
-#           height: dimensions.height
-#           width:  dimensions.width
+#           type:   request.headers["content-type"]
+#           height: dimensions?.height
+#           width:  dimensions?.width
 #         })
 
 class Dimensions extends Stream
