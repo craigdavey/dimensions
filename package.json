@@ -1,8 +1,8 @@
 {
   "name": "dimensions",
   "description": "Read width, height and rotation angle from GIF, PNG, JPEG and TIFF images in a Node environment. Zero dependencies.",
+  "version": "0.0.1",
   "url": "https://craigdavey.github.io/dimensions/",
-  "version": "0.0.0",
   "repository": "craigdavey/dimensions",
   "license": "Unlicense",
   "scripts": {
