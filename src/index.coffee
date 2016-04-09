@@ -15,8 +15,8 @@ TIFFScanner          = require "./tiff_scanner"
 #
 #     Dimensions = require "dimensions"
 #
-# The `Dimensions` constructor accepts a `buffer` or no arguments.
-# If you pass a `buffer` the dimensions will be processed immediately:
+# The `Dimensions` constructor accepts a `Buffer` or a `Stream`.
+# If you pass a `Buffer` the image dimensions will be processed immediately:
 #
 #     fs.readFile "nyc.jpg", (error, buffer) ->
 #       dimensions = new Dimensions buffer
@@ -24,7 +24,7 @@ TIFFScanner          = require "./tiff_scanner"
 #       dimensions.width  # Number of pixels.
 #       dimensions.angle  # Rotation angle in degrees.
 #
-# Listen for the `"ready"` event when you pipe a stream to an instance of `Dimensions`:
+# Listen for the `"ready"` event when you pass or pipe a stream to an instance of `Dimensions`:
 #
 #     stream = fs.createReadStream "nyc.jpg"
 #     dimensions = stream.pipe new Dimensions

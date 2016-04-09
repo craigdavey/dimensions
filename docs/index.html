@@ -99,14 +99,14 @@ TIFFScanner          = <span class="hljs-built_in">require</span> <span class="h
               </div>
               <p>Install the module with <code>npm install craigdavey/dimensions#0.0.1</code> and then require it in your program:</p>
 <pre><code>Dimensions = <span class="hljs-built_in">require</span> <span class="hljs-string">"dimensions"</span>
-</code></pre><p>The <code>Dimensions</code> constructor accepts a <code>buffer</code> or no arguments.
-If you pass a <code>buffer</code> the dimensions will be processed immediately:</p>
+</code></pre><p>The <code>Dimensions</code> constructor accepts a <code>Buffer</code> or a <code>Stream</code>.
+If you pass a <code>Buffer</code> the image dimensions will be processed immediately:</p>
 <pre><code>fs.readFile <span class="hljs-string">"nyc.jpg"</span>, <span class="hljs-function"><span class="hljs-params">(error, buffer)</span> -&gt;</span>
   dimensions = <span class="hljs-keyword">new</span> Dimensions buffer
   dimensions.height <span class="hljs-comment"># Number of pixels.</span>
   dimensions.width  <span class="hljs-comment"># Number of pixels.</span>
   dimensions.angle  <span class="hljs-comment"># Rotation angle in degrees.</span>
-</code></pre><p>Listen for the <code>&quot;ready&quot;</code> event when you pipe a stream to an instance of <code>Dimensions</code>:</p>
+</code></pre><p>Listen for the <code>&quot;ready&quot;</code> event when you pass or pipe a stream to an instance of <code>Dimensions</code>:</p>
 <pre><code>stream = fs.createReadStream <span class="hljs-string">"nyc.jpg"</span>
 dimensions = stream.pipe <span class="hljs-keyword">new</span> Dimensions
 dimensions.<span class="hljs-literal">on</span> <span class="hljs-string">"ready"</span>, <span class="hljs-function">-&gt;</span>
