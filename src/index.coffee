@@ -33,21 +33,6 @@ TIFFScanner          = require "./tiff_scanner"
 #       dimensions.width  # Number of pixels.
 #       dimensions.angle  # Rotation angle in degrees.
 #
-# Read image dimensions while simultaneously writing input to another stream:
-#
-#     server.post "/attachments", (request, response, next) ->
-#       if Dimensions.canMeasure request.headers["content-type"]
-#         dimensions = new Dimensions(request)
-#       id = storage.gererateIDforAttachment(request)
-#       request.pipe(fs.createWriteStream("uploads/#{id}")).on "close", ->
-#         response.writeHead 201, "Content-Type": "application/json"
-#         response.end JSON.stringify({
-#           id:     id
-#           type:   request.headers["content-type"]
-#           height: dimensions?.height
-#           width:  dimensions?.width
-#         })
-
 class Dimensions extends Stream
   module.exports = this
 
