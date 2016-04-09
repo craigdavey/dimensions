@@ -14,29 +14,29 @@ class JPEGScanner
   constructor: ->
     @angle = 0
 
-  # Include methods from the [Scanning](scanning.coffee) module.
+  # Include methods from the [Scanning](scanning.html) module.
   @prototype[name] = func for name, func of Scanning
 
   # Start of image.
   SOI_MARKER = [0xFF, 0xD8]
 
   # Start of frame zero, source of `width` and `height`.
-  SOF0_MARKER = 0xC0 
+  SOF0_MARKER = 0xC0
 
   # Potentially EXIF data, source of rotation `angle`.
-  APP1_MARKER = 0xE1 
+  APP1_MARKER = 0xE1
 
   # Start of scan marker – entropy-coded data follows.
-  SOS_MARKER = 0xDA 
+  SOS_MARKER = 0xDA
 
   # End of image.
-  EOI_MARKER = 0xD9 
+  EOI_MARKER = 0xD9
 
-  # Scan the `buffer` for JPEG image dimensions. 
+  # Scan the `buffer` for JPEG image dimensions.
   scan: (buffer) ->
     @data = buffer
     @position = 0
-    
+
     if @data.length > SOI_MARKER.length
       # Advance the position past the "Start of Image" marker.
       @advance SOI_MARKER.length
@@ -49,8 +49,8 @@ class JPEGScanner
           when APP1_MARKER then @scanApp1Frame()
           when EOI_MARKER, SOS_MARKER then break
           else @skipFrame()
-    
-    # Returns `true` if `width`, `height` and `angle` dimenisions were extracted. 
+
+    # Returns `true` if `width`, `height` and `angle` dimenisions were extracted.
     # Returns `false` otherwise.
     @width? and @height? and @angle?
 
@@ -65,7 +65,7 @@ class JPEGScanner
   # Read `width` and `height` dimensions from the Zero frame.
   scanZeroFrame: ->
     length = @data.readUInt16BE(@position)
-    
+
     if (@position + length) > @data.length
       @position = @data.length
     else
@@ -80,13 +80,13 @@ class JPEGScanner
       if length is (size * 3) + 8
         [@width, @height] = [width, height]
 
-  # Look for Exif data in the frame. 
+  # Look for Exif data in the frame.
   # If Exif data is present, read it to determine the rotation `angle` of the image.
-  # Delegates to an [Exif scanner](exif_scanner.coffee) to read the Exif data.
+  # Delegates to an [Exif scanner](exif_scanner.html) to read the Exif data.
   scanApp1Frame: ->
     if frame = @readFrame()
       if frame[2..5].toString() is "Exif" and frame[6] is frame[7] is 0
-        scanner = new ExifScanner 
+        scanner = new ExifScanner
         scanner.scan frame[8..-1]
         switch scanner.orientation
           when "left_top", "right_top"       then @angle = 90
@@ -101,7 +101,7 @@ class JPEGScanner
       return false
     else
       @readData length
-      
+
   # Read the length of the current frame and skip past it.
   skipFrame: ->
     length = @data.readUInt16BE(@position)

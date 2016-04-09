@@ -111,7 +111,7 @@ ExifScanner = <span class="hljs-built_in">require</span> <span class="hljs-strin
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Include methods from the <a href="scanning.coffee">Scanning</a> module.</p>
+              <p>Include methods from the <a href="scanning.html">Scanning</a> module.</p>
 
             </div>
             
@@ -201,14 +201,14 @@ ExifScanner = <span class="hljs-built_in">require</span> <span class="hljs-strin
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>Scan the <code>buffer</code> for JPEG image dimensions. </p>
+              <p>Scan the <code>buffer</code> for JPEG image dimensions.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>  scan: <span class="hljs-function"><span class="hljs-params">(buffer)</span> -&gt;</span>
     @data = buffer
     @position = <span class="hljs-number">0</span>
-    
+
     <span class="hljs-keyword">if</span> @data.length &gt; SOI_MARKER.length</pre></div></div>
             
         </li>
@@ -256,7 +256,7 @@ Frame Zero and APP1 frames are scanned to extract dimensions while all the other
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>Returns <code>true</code> if <code>width</code>, <code>height</code> and <code>angle</code> dimenisions were extracted. 
+              <p>Returns <code>true</code> if <code>width</code>, <code>height</code> and <code>angle</code> dimenisions were extracted.
 Returns <code>false</code> otherwise.</p>
 
             </div>
@@ -298,7 +298,7 @@ Returns a byte that identifies the frame or <code>undefined</code> if there are 
             
             <div class="content"><div class='highlight'><pre>  scanZeroFrame: <span class="hljs-function">-&gt;</span>
     length = @data.readUInt16BE(@position)
-    
+
     <span class="hljs-keyword">if</span> (@position + length) &gt; @data.length
       @position = @data.length
     <span class="hljs-keyword">else</span>
@@ -322,16 +322,16 @@ Returns a byte that identifies the frame or <code>undefined</code> if there are 
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>Look for Exif data in the frame. 
+              <p>Look for Exif data in the frame.
 If Exif data is present, read it to determine the rotation <code>angle</code> of the image.
-Delegates to an <a href="exif_scanner.coffee">Exif scanner</a> to read the Exif data.</p>
+Delegates to an <a href="exif_scanner.html">Exif scanner</a> to read the Exif data.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>  scanApp1Frame: <span class="hljs-function">-&gt;</span>
     <span class="hljs-keyword">if</span> frame = @readFrame()
       <span class="hljs-keyword">if</span> frame[<span class="hljs-number">2.</span><span class="hljs-number">.5</span>].toString() <span class="hljs-keyword">is</span> <span class="hljs-string">"Exif"</span> <span class="hljs-keyword">and</span> frame[<span class="hljs-number">6</span>] <span class="hljs-keyword">is</span> frame[<span class="hljs-number">7</span>] <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
-        scanner = <span class="hljs-keyword">new</span> ExifScanner 
+        scanner = <span class="hljs-keyword">new</span> ExifScanner
         scanner.scan frame[<span class="hljs-number">8.</span>.<span class="hljs-number">-1</span>]
         <span class="hljs-keyword">switch</span> scanner.orientation
           <span class="hljs-keyword">when</span> <span class="hljs-string">"left_top"</span>, <span class="hljs-string">"right_top"</span>       <span class="hljs-keyword">then</span> @angle = <span class="hljs-number">90</span>

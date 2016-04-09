@@ -59,7 +59,7 @@ class Dimensions extends Stream
     @["extractDimensionsFor#{@format}"]() if @format
     @done() unless @writable
 
-  # Include [image format identification](format_identification.coffee) methods.
+  # Include [image format identification](format_identification.html) methods.
   @prototype[name] = func for name, func of FormatIdentification
 
   # The `width` and `height` of a GIF is stored in a pair of unsigned 16 bit
@@ -78,7 +78,7 @@ class Dimensions extends Stream
       @height = @buffer.readUInt32BE(20)
       @done()
 
-  # Delegates extraction to a [JPEGScanner](jpeg_scanner.coffee).
+  # Delegates extraction to a [JPEGScanner](jpeg_scanner.html).
   extractDimensionsForJPEG: ->
     scanner = new JPEGScanner
     if scanner.scan @buffer
@@ -87,7 +87,7 @@ class Dimensions extends Stream
       @angle  = scanner.angle
       @done()
 
-  # Delegates extraction to a [TIFFScanner](tiff_scanner.coffee).
+  # Delegates extraction to a [TIFFScanner](tiff_scanner.html).
   extractDimensionsForTIFF: ->
     scanner = new TIFFScanner
     if scanner.scan @buffer
