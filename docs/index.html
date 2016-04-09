@@ -53,46 +53,6 @@
                 tiff_scanning.coffee
               </a>
             
-              
-              <a class="source" href="buffered_dimensions_test.html">
-                buffered_dimensions_test.coffee
-              </a>
-            
-              
-              <a class="source" href="exif_scanner_test.html">
-                exif_scanner_test.coffee
-              </a>
-            
-              
-              <a class="source" href="format_identification_test.html">
-                format_identification_test.coffee
-              </a>
-            
-              
-              <a class="source" href="incomplete_jpeg_scanner_test.html">
-                incomplete_jpeg_scanner_test.coffee
-              </a>
-            
-              
-              <a class="source" href="jpeg_scanner_test.html">
-                jpeg_scanner_test.coffee
-              </a>
-            
-              
-              <a class="source" href="streaming_dimensions_test.html">
-                streaming_dimensions_test.coffee
-              </a>
-            
-              
-              <a class="source" href="test_helper.html">
-                test_helper.coffee
-              </a>
-            
-              
-              <a class="source" href="tiff_scanner_test.html">
-                tiff_scanner_test.coffee
-              </a>
-            
           </div>
         </li>
       </ul>
@@ -153,24 +113,10 @@ dimensions.<span class="hljs-literal">on</span> <span class="hljs-string">"ready
   dimensions.height <span class="hljs-comment"># Number of pixels.</span>
   dimensions.width  <span class="hljs-comment"># Number of pixels.</span>
   dimensions.angle  <span class="hljs-comment"># Rotation angle in degrees.</span>
-</code></pre><p>Read image dimensions while simultaneously writing input to another stream:</p>
-<pre><code>server.post <span class="hljs-string">"/attachments"</span>, <span class="hljs-function"><span class="hljs-params">(request, response, next)</span> -&gt;</span>
-  <span class="hljs-keyword">if</span> Dimensions.canMeasure request.headers[<span class="hljs-string">"content-type"</span>]
-    dimensions = <span class="hljs-keyword">new</span> Dimensions(request)
-  id = storage.gererateIDforAttachment(request)
-  request.pipe(fs.createWriteStream(<span class="hljs-string">"uploads/<span class="hljs-subst">#{id}</span>"</span>)).<span class="hljs-literal">on</span> <span class="hljs-string">"close"</span>, <span class="hljs-function">-&gt;</span>
-    response.writeHead <span class="hljs-number">201</span>, <span class="hljs-string">"Content-Type"</span>: <span class="hljs-string">"application/json"</span>
-    response.end JSON.stringify({
-      id:     id
-      type:   request.headers[<span class="hljs-string">"content-type"</span>]
-      height: dimensions?.height
-      width:  dimensions?.width
-    })
 </code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dimensions</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Stream</span></span>
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dimensions</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Stream</span></span>
   <span class="hljs-built_in">module</span>.exports = <span class="hljs-keyword">this</span>
 
   SUPPORTED_TYPES = [<span class="hljs-string">"image/jpeg"</span>, <span class="hljs-string">"image/png"</span>, <span class="hljs-string">"image/gif"</span>, <span class="hljs-string">"image/tiff"</span>]
