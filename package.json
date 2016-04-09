@@ -7,7 +7,8 @@
   "repository": "craigdavey/dimensions",
   "license": "Unlicense",
   "scripts": {
-    "test": "cake test"
+    "test": "coffee --compile src; NODE_ENV=test nodeunit test/*_test.coffee",
+    "docs": "docco --layout classic src/*.coffee; open docs/index.html"
   },
   "devDependencies": {
     "coffee-script": "*",
